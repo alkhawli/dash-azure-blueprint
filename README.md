@@ -1,24 +1,24 @@
-# 🚀 Dash App on Azure with Terraform, ACR, and GitHub Actions
+# 🚀 Dash Azure Blueprint: Terraform, ACR, GitHub Actions
 
 This project contains:
 - A Dash app in Python
-- Docker-based deployment
-- Infrastructure as Code with Terraform
-- Automated builds and ACR deployment via GitHub Actions
+- Docker-based deployment to Azure
+- **Manual Infrastructure as Code with Terraform**
+- **Automated Docker image builds and ACR deployment via GitHub Actions**
 
 ---
 
 ## 📁 Project Structure
 
 ```
-my-dash-app/
+dash-azure-blueprint/
 ├── source/               # Dash app code and Dockerfile
 │   ├── app.py
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   └── .env              # (not committed)
 │
-├── infra/                # Terraform scripts for Azure
+├── infra/                # Terraform scripts for Azure (run manually)
 │   ├── main.tf
 │   ├── variables.tf
 │   ├── outputs.tf
@@ -44,13 +44,13 @@ my-dash-app/
 ### ✅ 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/my-dash-app.git
-cd my-dash-app
+git clone https://github.com/alkhawli/dash-azure-blueprint.git
+cd dash-azure-blueprint
 ```
 
 ---
 
-### ✅ 2. Terraform Deployment
+### ✅ 2. Terraform Deployment (Manual)
 
 1. Set your values in `infra/terraform.tfvars`:
 
@@ -60,7 +60,7 @@ subscription_id  = "your-subscription-id"
 docker_image     = "dash-app:v1"
 ```
 
-2. Run Terraform:
+2. Run Terraform locally:
 
 ```bash
 cd infra
@@ -76,7 +76,7 @@ Terraform will create:
 
 ---
 
-### ✅ 3. Push Docker Image to ACR
+### ✅ 3. Push Docker Image to ACR (Manual or via GitHub Actions)
 
 ```bash
 az acr login --name <your-acr-name>
@@ -150,17 +150,5 @@ jobs:
 ## ✅ Next Steps
 
 - ✅ Customize your Dash app
-- ✅ Add HTTPS and custom domain
-- 🔁 Optional: Add GitHub Action to auto-deploy Terraform too
-
----
-
-
-
-  ```bash
-az ad sp create-for-rbac \
-  --name "github-action-deployer" \
-  --role contributor \
-  --scopes /subscriptions/<your-subscription-id> \
-  --sdk-auth
-```
+- ✅ Add HTTPS and custom domain to your Azure Web App
+- 🔁 Optional: Automate Terraform via GitHub Actions later
